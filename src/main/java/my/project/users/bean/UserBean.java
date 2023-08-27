@@ -51,6 +51,9 @@ public class UserBean implements Serializable{
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, orphanRemoval=true)
 	List<UserRoleBean> userRoles;
 
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, orphanRemoval=true)
+	List<MealBean> userMeals;
+
 	public UserBean() {
 	}
 
