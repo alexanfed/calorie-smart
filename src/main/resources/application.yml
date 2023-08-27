@@ -1,0 +1,26 @@
+
+# Tomcat Server
+server:
+# Sets the spring security session timeout to 15 min
+  servlet.session.timeout: 15
+
+# Logger
+logging.level:
+  web: DEBUG
+  '[my.project.users]': DEBUG
+
+spring:
+# Database Settings
+  datasource:
+    url: jdbc:postgresql://healed-mule-4810.6wr.cockroachlabs.cloud:26257/comit
+    username: comit
+    password: d_-FiRfh_SxERoUfUTf6aQ
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        ddl-auto: create-drop
+        '[format_sql]': true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+#       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy

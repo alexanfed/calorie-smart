@@ -1,0 +1,63 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <title>Calorie Smart</title>
+  </head>
+  <body>
+    <div class="container mt-5 w-75">
+        <div th:replace="~{fragments/header :: header(new)}"></div>
+		
+		<div class="jumbotron bg-light border border-info mt-3 py-4" style="min-height: 450px">
+           <h1>New User</h1>
+           <form action="/create" method="post">
+			  <div class="form-group">
+			    <label for="first">First Name:</label>
+			    <input type="text" class="form-control" id="first" name="first" placeholder="Type in First Name" required>
+			  </div>
+			  <div class="form-group">
+			    <label for="last">Last Name:</label>
+			    <input type="text" class="form-control" id="last" name="last" placeholder="Type in Last Name" required>
+			  </div>
+			  <div class="form-group">
+			    <label for="username">Username:</label>
+			    <input type="text" class="form-control" id="username" name="username" placeholder="Type in Username" required>
+			  </div>
+			  <div class="form-group">
+			    <label for="password">Password:</label>
+			    <input type="password" class="form-control" id="password" name="password" placeholder="Type in Password" required>
+			  </div>
+			  <div class="form-group">
+			    <label for="registered">Registered:</label>
+			    <input type="date" class="form-control" id="registered" name="registered" required>
+			  </div>
+			   <div class="form-group">
+				   <label for="calPerDay">Calories per Day:</label>
+				   <input type="text" class="form-control" id="calPerDay" name="calPerDay" required>
+			   </div>
+			  <div class="form-group">
+			    <label for="role">Role:</label>
+			    <select class="custom-select form-control" id="role" name="role" required>
+				  <option value="" selected>Select a Role</option>
+				  <option th:each="role: ${roles}" 
+				          th:value="${role.idRole}"
+				          th:text="${role.nameRole}"
+				          th:selected="${role.idRole}==${user?.role?.idRole}">
+				  </option>
+				</select>
+			  </div>
+			  <button type="submit" class="btn btn-primary mt-2" style="min-width: 100px">Save</button>
+			</form>
+		</div>
+    </div>
+
+    <div th:replace="~{fragments/header :: scripts}"></div>
+
+  </body>
+</html>
