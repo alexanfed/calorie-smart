@@ -12,35 +12,35 @@
   </head>
   <body>
     <div class="container mt-5 w-75">
-        <div th:replace="~{fragments/header :: header(list)}"></div>
+        <div th:replace="~{fragments/header :: header(new)}"></div>
 		
 		<div class="jumbotron bg-light border border-info mt-3 py-4" style="min-height: 450px">
-           <h1>Update User</h1>
-           <form action="/update" method="post">
-			  <div class="form-group">
-			    <label for="id">Id:</label>
-			    <input type="text" class="form-control" id="id" name="id" th:value="${user?.idUser}" readonly>
-			  </div>
+           <h1>New User</h1>
+           <form action="/user/create" method="post">
 			  <div class="form-group">
 			    <label for="first">First Name:</label>
-			    <input type="text" class="form-control" id="first" name="first" placeholder="Type in First Name" th:value="${user?.firstName}" required>
+			    <input type="text" class="form-control" id="first" name="first" placeholder="Type in First Name" required>
 			  </div>
 			  <div class="form-group">
 			    <label for="last">Last Name:</label>
-			    <input type="text" class="form-control" id="last" name="last" placeholder="Type in Last Name" th:value="${user?.lastName}" required>
+			    <input type="text" class="form-control" id="last" name="last" placeholder="Type in Last Name" required>
 			  </div>
 			  <div class="form-group">
 			    <label for="username">Username:</label>
-			    <input type="text" class="form-control" id="username" name="username" placeholder="Type in Username" th:value="${user?.username}" required>
+			    <input type="text" class="form-control" id="username" name="username" placeholder="Type in Username" required>
+			  </div>
+			  <div class="form-group">
+			    <label for="password">Password:</label>
+			    <input type="password" class="form-control" id="password" name="password" placeholder="Type in Password" required>
+			  </div>
+			  <div class="form-group">
+			    <label for="registered">Registered:</label>
+			    <input type="date" class="form-control" id="registered" name="registered" required>
 			  </div>
 			   <div class="form-group">
 				   <label for="calPerDay">Calories per Day:</label>
-				   <input type="text" class="form-control" id="calPerDay" name="calPerDay" placeholder="Type in Calories per Day" th:value="${user?.calPerDay}" required>
+				   <input type="text" class="form-control" id="calPerDay" name="calPerDay" required>
 			   </div>
-			  <div class="form-group">
-			    <label for="Registered">Registered:</label>
-			    <input type="date" class="form-control" id="registered" name="registered" th:value="${#dates.format(user?.registered, 'yyyy-MM-dd')}" required>
-			  </div>
 			  <div class="form-group">
 			    <label for="role">Role:</label>
 			    <select class="custom-select form-control" id="role" name="role" required>
@@ -48,11 +48,10 @@
 				  <option th:each="role: ${roles}" 
 				          th:value="${role.idRole}"
 				          th:text="${role.nameRole}"
-                          th:selected="${role.idRole}==${#lists.isEmpty(user?.userRoles) ? '': user?.userRoles[0].role.idRole}">
+				          th:selected="${role.idRole}==${user?.role?.idRole}">
 				  </option>
 				</select>
 			  </div>
-
 			  <button type="submit" class="btn btn-primary mt-2" style="min-width: 100px">Save</button>
 			</form>
 		</div>

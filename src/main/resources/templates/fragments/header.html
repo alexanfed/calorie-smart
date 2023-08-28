@@ -19,13 +19,13 @@
 		        <a class="nav-link" href="/">Home</a>
 		      </li>
 		      <li class="nav-item" th:classappend="${option == 'list' ? 'active' : ''}">
-		        <a class="nav-link" href="/list">List Users</a>
+		        <a class="nav-link" href="/user/list">List Users</a>
 		      </li>
 				<li class="nav-item" th:classappend="${option == 'meal-list' ? 'active' : ''}">
 					<a class="nav-link" href="/meal/list">List Meals</a>
 				</li>
 		      <li class="nav-item" th:classappend="${option == 'new' ? 'active' : ''}">
-		        <a class="nav-link" href="/create">New User</a>
+		        <a class="nav-link" href="/user/create">New User</a>
 		      </li>
 				<li class="nav-item" th:classappend="${option == 'new' ? 'active' : ''}">
 					<a class="nav-link" href="/meal/create">New Meal</a>

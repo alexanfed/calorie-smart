@@ -35,8 +35,8 @@
                     <td th:text="${#dates.format(user.registered, 'dd-MM-yyyy')}"></td>
                     <td th:text="${user.calPerDay}"></td>
                     <!--<td th:text="${#lists.isEmpty(user.userRoles)? '':#strings.toUpperCase(user.userRoles[0].role.nameRole)}"></td>//-->
-                        <td><a th:href="@{/update/} + ${user.idUser}">Update</a></td>
-                        <td><a th:href="@{/delete/} + ${user.idUser}">Delete</a></td>
+                        <td><a th:href="@{/user/update/} + ${user.idUser}">Update</a></td>
+                        <td><a th:href="@{/user/delete/} + ${user.idUser}">Delete</a></td>
                       </tr>
                     </tbody>
                   </table>

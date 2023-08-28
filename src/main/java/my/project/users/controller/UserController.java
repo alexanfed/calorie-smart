@@ -41,25 +41,25 @@ public class UserController {
 		return "index";
 	}
 	
-	@GetMapping("/list")
+	@GetMapping("/user/list")
 	public ModelAndView list() {
 		
 		logger.debug("Listing Users");
 		
 		List<UserBean> users = this.userService.list();
 		
-		return new ModelAndView("list","users",users);
+		return new ModelAndView("user-list","users",users);
 	}
 	
-	@GetMapping("/create")
+	@GetMapping("/user/create")
 	public String showCreate() {
 		
-		logger.debug("Show Create");
+		logger.debug("Show User Create");
 		
-		return "create";
+		return "user-create";
 	}
 
-	@PostMapping("/create")
+	@PostMapping("/user/create")
 	public String createUser(HttpServletRequest req) {
 		
 		logger.debug("Create User");
@@ -77,20 +77,20 @@ public class UserController {
 		
 		this.userService.createUser(user, Util.parseId(idRole));
 		
-		return "redirect:/list";
+		return "redirect:/user/list";
 	}
 	
-	@GetMapping("/update/{id}")
+	@GetMapping("/user/update/{id}")
 	public ModelAndView showUpdate(@PathVariable Long id) {
 		
-		logger.debug("Show Update");
+		logger.debug("Show User Update");
 		
 		UserBean user = this.userService.findUser(id);
 		
-		return new ModelAndView("update","user",user);
+		return new ModelAndView("user-update","user",user);
 	}
 	
-	@PostMapping("/update")
+	@PostMapping("/user/update")
 	public String updateUser(HttpServletRequest req) {
 		
 		logger.debug("Update User");
@@ -107,17 +107,17 @@ public class UserController {
 		
 		this.userService.updateUser(user,Util.parseId(idRole));
 		
-		return "redirect:/list";
+		return "redirect:/user/list";
 	}
 
-	@GetMapping("/delete/{id}")
+	@GetMapping("/user/delete/{id}")
 	public String deleteUser(@PathVariable Long id) {
 		
 		logger.debug("Delete User");
 
 		this.userService.deleteUser(id);
 		
-		return "redirect:/list";
+		return "redirect:/user/list";
 	}
 
 	public Logger getLogger() {

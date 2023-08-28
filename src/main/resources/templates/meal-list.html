@@ -17,6 +17,9 @@
             background-color: #f2dede; /* Red for high calories */
         }
     </style>
+        <script th:inline="javascript">
+        var dailyCalories = [[${dailyCalories}]];
+    </script>
     <title>Calorie Smart</title>
   </head>
   <body>
