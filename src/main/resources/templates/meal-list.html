@@ -1,0 +1,48 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <title>Calorie Smart</title>
+  </head>
+  <body>
+    <div class="container mt-5 w-75">
+        <div th:replace="~{fragments/header :: header(list)}"></div>
+        <div class="table-responsive mt-3">
+       		<table class="table table-striped table-hover">
+			  <thead>
+			    <tr>
+			      <th scope="col">Id Meal</th>
+                    <!--//--> <th scope="col">Id User</th>
+                    <th scope="col">Date Meal</th>
+                    <th scope="col">Description Meal</th>
+                    <th scope="col">Calories Meal</th>
+                      <!--<th scope="col">Role</th>//-->
+                    <!-- <th scope="col">#</th>
+                     <th scope="col">#</th>
+                    //-->
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr th:each="meal : ${meals}">
+                       <td th:text="${meal.idMeal}"></td>
+                       <td th:text="${meal.user.username}"></td> <!-- Assuming 'username' is a property of UserBean -->
+                       <td th:text="${#dates.format(meal.dateMeal, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                       <td th:text="${meal.descMeal}"></td>
+                       <td th:text="${meal.calMeal}"></td>
+                   </tr>
+                 </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/header :: scripts}"></div>
+
+  </body>
+</html>
