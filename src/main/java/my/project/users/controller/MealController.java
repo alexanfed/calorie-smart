@@ -122,16 +122,12 @@ public class MealController {
     }
 
     private MealBean createMealBean(String idMeal, String username, String dateMeal, String descMeal, String calMeal) {
-        // Perform a null check on 'descMeal' before using it
-        String description = descMeal != null ? descMeal : ""; // Use an empty string if 'descMeal' is null
 
-        // Retrieve the UserBean with the given username from your data source
-        UserBean user = userServiceService.getUserByUsername(username); // Replace with your actual service method
+        String description = descMeal != null ? descMeal : "";
+
+        UserBean user = userServiceService.getUserByUsername(username);
 
         if (user == null) {
-            // Handle the case when the user does not exist
-            // You can throw an exception or return an error message as needed
-            // For example:
             throw new RuntimeException("User not found for username: " + username);
         }
 
