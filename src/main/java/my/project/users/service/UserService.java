@@ -88,6 +88,9 @@ public class UserService {
 			throw new RuntimeException("Invalid User Data: " + user);
 		}
 	}
-	
-	
+
+
+	public UserBean getUserByUsername(String username) {
+		return userDao.findByUsername(username);
+	}
 }

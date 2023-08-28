@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,9 @@ public class MealController {
     @Autowired
     MealService mealService;
 
+    @Autowired
+    UserService userServiceService;
+
     /*
     @GetMapping("/meal/list")
     public ModelAndView list() {
@@ -38,6 +42,7 @@ public class MealController {
         return new ModelAndView("meal-list","meals",meals);
     }
         */
+
     @GetMapping("/meal/list")
     public ModelAndView list() {
         logger.debug("Listing Meals");
@@ -93,8 +98,7 @@ public class MealController {
         return new ModelAndView("meal-update","meal",meal);
     }
     @PostMapping("/meal/update")
-    public String updateMeal(HttpServletRequest req) {
-
+    public String updateMeal(HttpServletRequest req, Model model) {
         logger.debug("Update Meal");
 
         String idMeal = req.getParameter("idMeal");
@@ -103,17 +107,37 @@ public class MealController {
         String descMeal = req.getParameter("descMeal");
         String calMeal = req.getParameter("calMeal");
 
-        MealBean meal = this.createMealBean(idMeal, user, dateMeal, descMeal, calMeal);
+        // Check if descMeal is null or empty
+        if (descMeal == null || descMeal.isEmpty()) {
+            // Add an error message to the model
+            model.addAttribute("errorMessage", "Description is required.");
+            return "redirect:/meal/list"; // Redirect back to the list page
+        }
 
+        // Proceed with meal creation and update if descMeal is not empty
+        MealBean meal = this.createMealBean(idMeal, user, dateMeal, descMeal, calMeal);
         this.mealService.updateMeal(meal, Util.parseId(idMeal));
 
         return "redirect:/meal/list";
     }
 
-    private MealBean createMealBean(String idMeal, String user, String dateMeal, String descMeal, String calMeal) {
+    private MealBean createMealBean(String idMeal, String username, String dateMeal, String descMeal, String calMeal) {
+        // Perform a null check on 'descMeal' before using it
+        String description = descMeal != null ? descMeal : ""; // Use an empty string if 'descMeal' is null
 
-        MealBean meal = new MealBean(Util.parseId(idMeal), "1111",Util.parseDate(dateMeal),descMeal,Util.parseCalPerDay(calMeal));
+        // Retrieve the UserBean with the given username from your data source
+        UserBean user = userServiceService.getUserByUsername(username); // Replace with your actual service method
 
+        if (user == null) {
+            // Handle the case when the user does not exist
+            // You can throw an exception or return an error message as needed
+            // For example:
+            throw new RuntimeException("User not found for username: " + username);
+        }
+
+        MealBean meal = new MealBean(Util.parseId(idMeal), user, Util.parseDate(dateMeal), description, Util.parseCalPerDay(calMeal));
         return meal;
     }
+
+
 }
