@@ -38,6 +38,9 @@ public class MealBean {
         this.calMeal = calMeal;
     }
 
+    public MealBean(Long idMeal, String s, Date dateMeal, String descMeal, Long calMeal) {
+    }
+
     public Long getIdMeal() {
         return idMeal;
     }

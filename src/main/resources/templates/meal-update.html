@@ -1,0 +1,49 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <title>Calorie Smart</title>
+  </head>
+  <body>
+    <div class="container mt-5 w-75">
+        <div th:replace="~{fragments/header :: header(list)}"></div>
+		
+		<div class="jumbotron bg-light border border-info mt-3 py-4" style="min-height: 450px">
+           <h1>Update Meal</h1>
+           <form action="/meal/update" method="post">
+			  <div class="form-group">
+			    <label for="idMeal">Id:</label>
+			    <input type="text" class="form-control" id="idMeal" name="idMeal" th:value="${meal?.idMeal}" readonly>
+			  </div>
+			  <div class="form-group">
+				<label for="user">User:</label>
+				<input type="text" class="form-control" id="user" name="user" th:value="${meal?.user.username}" readonly>
+			  </div>
+			  <div class="form-group">
+				  <label for="dateMeal">Date:</label>
+				  <input type="date" class="form-control" id="dateMeal" name="dateMeal" th:value="${#dates.format(meal?.dateMeal, 'yyyy-MM-dd')}" required>
+			  </div>
+			  <div class="form-group">
+			    <label for="descMeal">Description:</label>
+			    <input type="text" class="form-control" id="descMeal" name="descMeal" placeholder="Type in Description" th:value="${meal?.descMeal}" required>
+			  </div>
+			  <div class="form-group">
+			    <label for="calMeal">Calories:</label>
+			    <input type="text" class="form-control" id="calMeal" name="calMeal" placeholder="Type in Calories" th:value="${meal?.calMeal}" required>
+			  </div>
+
+			  <button type="submit" class="btn btn-primary mt-2" style="min-width: 100px">Save</button>
+			</form>
+		</div>
+    </div>
+
+    <div th:replace="~{fragments/header :: scripts}"></div>
+
+  </body>
+</html>

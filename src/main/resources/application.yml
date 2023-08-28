@@ -2,7 +2,7 @@
 # Tomcat Server
 server:
 # Sets the spring security session timeout to 15 min
-  servlet.session.timeout: 15
+  servlet.session.timeout: 1500
 
 # Logger
 logging.level:
